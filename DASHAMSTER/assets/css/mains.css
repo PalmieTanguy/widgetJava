@@ -26,6 +26,17 @@ footer {
     text-align: center;
 }
 
+.col-sm {
+    text-align: center;
+}
+
+.footer {
+    background-color: #e9ecef;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+
 .colorRed {
     color: #E2454A;
 }
@@ -38,4 +49,15 @@ footer {
     background-color: #d6d4d4;
     height: 100%;
     width: 100%;
+}
+
+#myHr {
+    background-color: red;
+    border: 2px solid red;
+    border-radius: 30%;
+}
+
+.footer_style {
+    margin-left: 3em;
+    margin-right: 3em;
 }

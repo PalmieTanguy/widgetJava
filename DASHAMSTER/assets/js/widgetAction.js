@@ -135,14 +135,16 @@ async function action(e) {
             });
             break;
         case "minecraft":
-            ip = $("#minecraft" + nbCase).val();
-            url = myUrl + "/minecraft?minecraft=" + ip;
+            ipM = $("#minecraft" + nbCase).val();
+            url = myUrl + "/minecraft?minecraft=" + ipM;
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 url: url,
                 success: function(value) {
+                    console.log(value.favicon)
                     myHtml = actionMinecraft(value.players.now, value.server.name, value.favicon);
+                    console.log(myHtml)
                     $("#w" + nbCase).html(myHtml)
                 },
                 error: function() {
@@ -153,12 +155,15 @@ async function action(e) {
             break;
         case "pokemon":
             poke = $("#pokemon" + nbCase).val();
+            poke = poke.toLowerCase();
             url = myUrl + "/pokemon?pokemon=" + poke;
+            console.log(url)
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 url: url,
                 success: function(value) {
+                    console.log(value)
                     myHtml = actionPokemon(
                         value.sprites.back_default,
                         value.name, value.weight, value.height);
@@ -229,17 +234,18 @@ function actionWeather(ville, deg, speed, temp, temp_min, temp_max, imageWeather
         "<u>Temp:</u>" + "</br>" +
         "Medium: " + Math.round(temp) + "°</br>" +
         "Min: " + Math.round(temp_min) + "°</br>" +
-        "Max: " + Math.round(temp_max) + "°/br>" +
+        "Max: " + Math.round(temp_max) + "°" +
         "</div>" +
         '<img src="' + img + '"width="15%" height="15%"></center>';
 }
 
 function actionMinecraft(player, name, flag) {
+    console.log(flag)
     return "<center class='text-secondary'>" +
         "Player connected: <strong>" + player + "</br></strong></br>" +
         "<br>name server: <strong>" + name + "</br></strong>" +
         "</center>" +
-        '<img src="' + flag + '" width="20%" height="20%>';
+        '<img src="' + flag + '" width="30%" height="30%" >';
 }
 
 function actionBeer(value, bg) {
