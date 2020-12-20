@@ -1,0 +1,1 @@
+const myUrl = "http://localhost:8080"
