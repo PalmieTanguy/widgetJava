@@ -15,7 +15,6 @@ async function action(e) {
                 dataType: 'json',
                 url: url,
                 success: function(value) {
-                    console.log(value.weather[0].main)
                     myHtml = actionWeather(value.name, value.wind.deg, value.wind.speed, value.main.temp - 274, value.main.temp_min - 274, value.main.temp_max - 274, value.weather[0].main);
                     $("#w" + nbCase).html(myHtml)
                 },
@@ -27,15 +26,12 @@ async function action(e) {
             break;
         case "localisation":
             theIp = $("#ipL" + nbCase).val();
-            console.log(theIp)
-
             url = myUrl + "/ip?ip=" + theIp;
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 url: url,
                 success: function(value) {
-                    console.log(value);
 
                     myHtml = actionLocaliasation(value.country,
                         value.regionName,
@@ -44,7 +40,6 @@ async function action(e) {
                     $("#w" + nbCase).html(myHtml)
                 },
                 error: function() {
-                    console.log("error");
                     myHtml = "None";
                     $("#w" + nbCase).html(myHtml)
                 }
@@ -58,15 +53,12 @@ async function action(e) {
                 dataType: 'json',
                 url: url,
                 success: function(value) {
-                    console.log(value);
-                    //console.log(value.graphql.user);
                     part = value.graphql.user
-                    console.log(part.biography)
-                    myHtml = actionInsta(part.full_name, part.is_private, part.edge_follow.count, part.edge_followed_by.count, part.biography, part.profile_pic_url);
+
+                    myHtml = actionInsta(part.full_name, part.is_private, part.edge_follow.count, part.edge_followed_by.count, part.profile_pic_url);
                     $("#w" + nbCase).html(myHtml)
                 },
                 error: function() {
-                    console.log("error");
                     myHtml = "Use nomber max call api or bad name";
                     $("#w" + nbCase).html(myHtml)
                 }
@@ -90,14 +82,12 @@ async function action(e) {
             break;
         case "country":
             value = $("#country" + nbCase).val();
-            console.log(value)
             url = myUrl + "/country?country=" + value;
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 url: url,
                 success: function(value) {
-                    console.log(value[0].flag)
                     myHtml = actionCountry(value[0].capital,
                         value[0].currencies[0].name,
                         value[0].cioc,
@@ -129,15 +119,12 @@ async function action(e) {
             break;
         case "zipcode":
             code = $("#zip" + nbCase).val();
-            console.log(code)
             url = myUrl + "/zipcode?zipCode=" + code;
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 url: url,
                 success: function(value) {
-                    console.log(value)
-
                     myHtml = actionZipCode(value.country, value.places[0].state, value.places[0]["place name"], value["post code"]);
                     $("#w" + nbCase).html(myHtml)
                 },
@@ -205,7 +192,7 @@ function actionLocaliasation(country, region, city, isp, query) {
         "</div></center>"
 }
 
-function actionInsta(firstname, prive, follow, followBy, hist, img) {
+function actionInsta(firstname, prive, follow, followBy, img) {
     if (prive == true) {
         cadena = "Yes 🔐";
     } else {
@@ -214,7 +201,7 @@ function actionInsta(firstname, prive, follow, followBy, hist, img) {
 
     return "<center><h3 class='color-red'>" +
         "Firstname: " + firstname + "</br>Private: " +
-        cadena + "</br>Follow: " + follow + "</br>Follow by: " + followBy + "</h3></h5>" + hist +
+        cadena + "</br>Follow: " + follow + "</br>Follow by: " + followBy + "</h3></h5>" +
         "</h5></center>" + '<img src="' + img + '"width="30%" height="30%">';
 }
 
@@ -228,7 +215,6 @@ function actionZipCode(country, dep, city, postCode) {
 }
 
 function actionWeather(ville, deg, speed, temp, temp_min, temp_max, imageWeather) {
-    console.log(imageWeather)
     if (imageWeather == "Clouds") {
         img = "https://cdn.pixabay.com/photo/2020/05/11/12/48/cloud-5158044_960_720.png";
     } else {

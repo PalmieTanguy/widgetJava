@@ -12,7 +12,6 @@ setInterval(
                 $(".main").html(client + '"server:"{' + value + "}")
             },
             error: function(e) {
-                console.log(e)
                 myJSON = "None";
                 $(".main").html(myJSON)
             }

@@ -1,22 +1,15 @@
-var widgetList = [];
 var index = 0;
 
-
-
 function myclose(e) {
-    closeId = e.getAttribute("value");
-    console.log(closeId)
-    $("#case" + closeId).html("");
-    console.log($("#case" + closeId))
+
+    closeId = e.getAttribute("id");
+    $("#" + closeId).parent().parent().html("");
 }
 
 function reload(e) {
     reloadId = e.getAttribute("value");
     nameWidget = e.getAttribute("name");
-    console.log("reload " + reloadId)
-    console.log($("#case" + reloadId))
     let get = "";
-    console.log(nameWidget)
     switch (nameWidget) {
         case "weather":
             get = indiceWeather();
@@ -46,7 +39,6 @@ function reload(e) {
             get = indiceminecraft();
             break;
         case "pokemon":
-            console.log("ll")
             get = indicepokemon();
             break;
     }
@@ -93,15 +85,13 @@ function add(e) {
             get = indicepokemon();
             break;
     }
-    console.log("case : " + index);
     $("#case" + index).html(get);
-
 }
 
 function indiceWeather() {
     return '<div class="draggable" draggable="true">' +
         '<div class="card-body" id="fr">' +
-        '<button class="btn btn-dark" value="' + index + '" onclick="myclose(this)">x</button> ' +
+        '<button class="btn btn-dark" value="' + index + '" id="close' + index + '"  onclick="myclose(this)">x</button> ' +
         '<button class="btn btn-info" name="weather" value="' + index + '" onclick="reload(this)">Reload</button> ' +
         '<center id="w' + index + '">' +
         '<h5 class="card-title text-danger ">Weather</h5>' +
